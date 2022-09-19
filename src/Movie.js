@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image,
   ActivityIndicator,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import Header from './Header.js';
 import {useNavigation} from '@react-navigation/native';
@@ -17,9 +17,7 @@ import {MoviesApi} from './services/services';
 
 export default function Movie() {
   const navigation = useNavigation();
-  const [open, setopen] = useState(false);
   const [Data, setData] = useState('');
-  const [searchvalue, setSearchvalue] = useState('');
   const [loading, setloading] = useState(false);
 
   useEffect(() => {
@@ -37,7 +35,6 @@ export default function Movie() {
   }, []);
 
   const actionItem = ({item}) => {
-    console.log(item.backdrop);
     const gen = item.genres.filter(actionfun);
     function actionfun(input) {
       return input == 'Action';
@@ -46,19 +43,8 @@ export default function Movie() {
       <View>
         {gen == 'Action' && (
           <View style={{margin: 10}}>
-            <Image
-              source={{uri: item.poster}}
-              style={{height: 150, width: 100}}
-            />
-            <Text
-              style={{
-                color: 'white',
-                width: 100,
-                textAlign: 'center',
-                backgroundColor: 'skyblue',
-              }}>
-              {item.title}
-            </Text>
+            <Image source={{uri: item.poster}} style={styles.image1} />
+            <Text style={styles.text1}>{item.title}</Text>
           </View>
         )}
       </View>
@@ -66,7 +52,6 @@ export default function Movie() {
   };
 
   const crimeItem = ({item}) => {
-    console.log(item.backdrop);
     const gen = item.genres.filter(crimefun);
     function crimefun(input) {
       return input == 'Crime';
@@ -75,19 +60,8 @@ export default function Movie() {
       <View>
         {gen == 'Crime' && (
           <View style={{margin: 10}}>
-            <Image
-              source={{uri: item.poster}}
-              style={{height: 150, width: 100}}
-            />
-            <Text
-              style={{
-                color: 'white',
-                width: 100,
-                textAlign: 'center',
-                backgroundColor: 'skyblue',
-              }}>
-              {item.title}
-            </Text>
+            <Image source={{uri: item.poster}} style={styles.image1} />
+            <Text style={styles.text1}>{item.title}</Text>
           </View>
         )}
       </View>
@@ -95,7 +69,6 @@ export default function Movie() {
   };
 
   const dramaItem = ({item}) => {
-    console.log(item.backdrop);
     const gen = item.genres.filter(dramafun);
     function dramafun(input) {
       return input == 'Drama';
@@ -104,19 +77,8 @@ export default function Movie() {
       <View>
         {gen == 'Drama' && (
           <View style={{margin: 10}}>
-            <Image
-              source={{uri: item.poster}}
-              style={{height: 150, width: 100}}
-            />
-            <Text
-              style={{
-                color: 'white',
-                width: 100,
-                textAlign: 'center',
-                backgroundColor: 'skyblue',
-              }}>
-              {item.title}
-            </Text>
+            <Image source={{uri: item.poster}} style={styles.image1} />
+            <Text style={styles.text1}>{item.title}</Text>
           </View>
         )}
       </View>
@@ -124,7 +86,6 @@ export default function Movie() {
   };
 
   const animationItem = ({item}) => {
-    console.log(item.backdrop);
     const gen = item.genres.filter(animationfun);
     function animationfun(input) {
       return input == 'Animation';
@@ -133,19 +94,8 @@ export default function Movie() {
       <View>
         {gen == 'Animation' && (
           <View style={{margin: 10}}>
-            <Image
-              source={{uri: item.poster}}
-              style={{height: 150, width: 100}}
-            />
-            <Text
-              style={{
-                color: 'white',
-                width: 100,
-                textAlign: 'center',
-                backgroundColor: 'skyblue',
-              }}>
-              {item.title}
-            </Text>
+            <Image source={{uri: item.poster}} style={styles.image1} />
+            <Text style={styles.text1}>{item.title}</Text>
           </View>
         )}
       </View>
@@ -194,13 +144,7 @@ export default function Movie() {
           />
         </ScrollView>
       ) : (
-        <View
-          style={{
-            alignContent: 'center',
-            justifyContent: 'center',
-            margin: 30,
-            // backgroundColor: '#ffffff',
-          }}>
+        <View style={styles.loaderstyle}>
           <ActivityIndicator size={50} color={'black'} />
         </View>
       )}
@@ -209,45 +153,23 @@ export default function Movie() {
 }
 
 const styles = StyleSheet.create({
-  back: {
-    flexDirection: 'row',
-    paddingHorizontal: 20,
-    paddingTop: 15,
-    backgroundColor: '#87CEEB',
-    alignSelf: 'center',
-  },
-  image: {
-    height: 18,
-    width: 20,
-    resizeMode: 'stretch',
-    tintColor: '#fff',
-    transform: [{rotate: '180deg'}],
-  },
   image1: {
-    height: 18,
-    width: 20,
-    resizeMode: 'stretch',
-    tintColor: '#fff',
-    // transform: [{rotate: '180deg'}],
+    height: 150,
+    width: 100,
   },
   text1: {
-    width: '90%',
+    color: 'white',
+    width: 100,
     textAlign: 'center',
-    // justifyContent: 'center',
-    // backgroundColor:'red',
-    // alignSelf:"center",
-    fontSize: 20,
-    color: '#fff',
+    backgroundColor: 'skyblue',
   },
   item: {
     backgroundColor: 'white',
     padding: 20,
   },
-  line2: {
-    alignSelf: 'center',
-    width: '100%',
-    // marginTop: 10,
-    // backgroundColor: 'gray',
-    height: 1,
+  loaderstyle: {
+    alignContent: 'center',
+    justifyContent: 'center',
+    margin: 30,
   },
 });
